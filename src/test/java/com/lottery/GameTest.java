@@ -1,15 +1,15 @@
 package com.lottery;
 
+import static com.lottery.CollectionUtils.setOf;
+import static com.lottery.CollectionUtils.sumOf;
 import static com.lottery.DateTimeUtils.normaliseToMonday;
 import static com.lottery.DateTimeUtils.parse;
-import static com.lottery.SetUtils.productOf;
-import static com.lottery.SetUtils.setOf;
-import static com.lottery.SetUtils.sumOf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigInteger;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.joda.time.DateTime;
@@ -64,37 +64,48 @@ public class GameTest {
 		// A few constraint-checks.
 		RandomNumberMachine machine = new RandomNumberMachine();
 		DateTime drawDate = DateTimeUtils.parse("01/01/2000");
-		
+
 		for (int i = 0; i < 5000; i++) {
-			Set<Integer> winningNumbers = machine.draw();
-			Set<Integer> chosenNumbers = machine.draw();
+			List<Integer> winningNumbers = machine.draw();
+			List<Integer> chosenNumbers = machine.draw();
 			Set<Integer> matches = new HashSet<Integer>(winningNumbers);
 			matches.retainAll(chosenNumbers);
 
-			BigInteger prize = Game.calculatePrize(drawDate, winningNumbers, chosenNumbers);
-			
+			BigInteger prize = Game.calculatePrize(drawDate, winningNumbers,
+					chosenNumbers);
+
 			switch (matches.size()) {
 			case 0:
 			case 1:
 			case 2:
-				assertTrue(prize.compareTo(BigInteger.valueOf(1+2+3+4+5+6)) >= 0);
-				assertTrue(prize.compareTo(BigInteger.valueOf(60+59+58+57+56+55)) <= 0);
+				assertTrue(prize.compareTo(BigInteger.valueOf(1 + 2 + 3 + 4 + 5
+						+ 6)) >= 0);
+				assertTrue(prize.compareTo(BigInteger.valueOf(60 + 59 + 58 + 57
+						+ 56 + 55)) <= 0);
 				break;
 			case 3:
-				assertTrue(prize.compareTo(BigInteger.valueOf((3 * 1000) + (1 * 2 * 3))) >= 0);
-				assertTrue(prize.compareTo(BigInteger.valueOf((3 * 1000) + (60 * 59 * 58))) <= 0);
+				assertTrue(prize.compareTo(BigInteger.valueOf((3 * 1000)
+						+ (1 * 2 * 3))) >= 0);
+				assertTrue(prize.compareTo(BigInteger.valueOf((3 * 1000)
+						+ (60 * 59 * 58))) <= 0);
 				break;
 			case 4:
-				assertTrue(prize.compareTo(BigInteger.valueOf((4 * 1000) + (1 * 2 * 3 * 4))) >= 0);
-				assertTrue(prize.compareTo(BigInteger.valueOf((4 * 1000) + (60 * 59))) <= 0);
+				assertTrue(prize.compareTo(BigInteger.valueOf((4 * 1000)
+						+ (1 * 2 * 3 * 4))) >= 0);
+				assertTrue(prize.compareTo(BigInteger.valueOf((4 * 1000)
+						+ (60 * 59))) <= 0);
 				break;
 			case 5:
-				assertTrue(prize.compareTo(BigInteger.valueOf((5 * 1000) + (1 * 2 * 3 * 4 * 5))) >= 0);
-				assertTrue(prize.compareTo(BigInteger.valueOf((5 * 1000) + (60))) <= 0);
+				assertTrue(prize.compareTo(BigInteger.valueOf((5 * 1000)
+						+ (1 * 2 * 3 * 4 * 5))) >= 0);
+				assertTrue(prize.compareTo(BigInteger
+						.valueOf((5 * 1000) + (60))) <= 0);
 				break;
 			case 6:
-				assertTrue(prize.compareTo(BigInteger.valueOf(10000*(1+2+3+4+5+6))) >= 0);
-				assertTrue(prize.compareTo(BigInteger.valueOf(10000*(60+59+58+57+56+55))) <= 0);
+				assertTrue(prize.compareTo(BigInteger.valueOf(10000 * (1 + 2
+						+ 3 + 4 + 5 + 6))) >= 0);
+				assertTrue(prize.compareTo(BigInteger.valueOf(10000 * (60 + 59
+						+ 58 + 57 + 56 + 55))) <= 0);
 				break;
 			default:
 				throw new IllegalStateException();

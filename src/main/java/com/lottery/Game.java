@@ -1,10 +1,12 @@
 package com.lottery;
 
-import static com.lottery.SetUtils.productOf;
-import static com.lottery.SetUtils.sumOf;
+import static com.lottery.CollectionUtils.productOf;
+import static com.lottery.CollectionUtils.sumOf;
+import static java.lang.String.format;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,13 +25,17 @@ public class Game {
 	}
 
 	public List<DrawResult> runGamePeriod(DateTime endDate,
-			Set<Integer> chosenNumbers) {
-		List<DrawResult> results = new ArrayList<DrawResult>();
+			Collection<Integer> chosenNumbers) {
+		if (chosenNumbers.size() != DRAW_NUMBER_COUNT) {
+			throw new IllegalArgumentException(format(
+					"You must choose exactly %d numbers.", DRAW_NUMBER_COUNT));
+		}
 
 		DateTime drawDate = endDate.minusWeeks(26);
+		List<DrawResult> results = new ArrayList<DrawResult>();
 
 		while (drawDate.compareTo(endDate) <= 0) {
-			Set<Integer> winningNumbers = machine.draw();
+			List<Integer> winningNumbers = machine.draw();
 			BigInteger prize = calculatePrize(drawDate, winningNumbers,
 					chosenNumbers);
 
@@ -43,7 +49,7 @@ public class Game {
 	}
 
 	public static BigInteger calculatePrize(DateTime drawDate,
-			Set<Integer> winningNumbers, Set<Integer> chosenNumbers) {
+			Collection<Integer> winningNumbers, Collection<Integer> chosenNumbers) {
 
 		BigInteger rawPrize = calculateRawPrize(drawDate, winningNumbers,
 				chosenNumbers);
@@ -68,7 +74,7 @@ public class Game {
 	}
 
 	private static BigInteger calculateRawPrize(DateTime drawDate,
-			Set<Integer> winningNumbers, Set<Integer> chosenNumbers) {
+			Collection<Integer> winningNumbers, Collection<Integer> chosenNumbers) {
 		Set<Integer> correctlyChosenNumbers = new HashSet<Integer>(
 				winningNumbers);
 		correctlyChosenNumbers.retainAll(chosenNumbers);
@@ -89,8 +95,7 @@ public class Game {
 		case 6:
 			return sumOf(winningNumbers).multiply(BigInteger.valueOf(10000));
 		default:
-			// TODO Testme.
-			throw new IllegalStateException();
+			throw new IllegalStateException("Programmer error. This class has been changed and is no longer self-consistent.");
 		}
 	}
 }

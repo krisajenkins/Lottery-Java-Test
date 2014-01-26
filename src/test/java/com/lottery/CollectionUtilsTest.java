@@ -1,16 +1,18 @@
 package com.lottery;
 
-import static com.lottery.SetUtils.productOf;
-import static com.lottery.SetUtils.sumOf;
+import static com.lottery.CollectionUtils.productOf;
+import static com.lottery.CollectionUtils.sumOf;
+import static com.lottery.CollectionUtils.toCSV;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Test;
 
-public class SetUtilsTest {
+public class CollectionUtilsTest {
 
 	@Test
 	public void testSumAndProductOf() {
@@ -25,5 +27,12 @@ public class SetUtilsTest {
 			assertEquals(sum, sumOf(numbers));
 			assertEquals(product, productOf(numbers));
 		}
+	}
+	
+	@Test
+	public void testToCSV() {
+		assertEquals("", toCSV(Arrays.asList()));
+		assertEquals("1", toCSV(Arrays.asList(1)));
+		assertEquals("1, 2, 3", toCSV(Arrays.asList(1, 2, 3)));
 	}
 }

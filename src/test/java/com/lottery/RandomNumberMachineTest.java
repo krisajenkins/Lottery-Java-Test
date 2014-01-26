@@ -11,7 +11,6 @@ import java.security.NoSuchProviderException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.Test;
 
@@ -25,7 +24,7 @@ public class RandomNumberMachineTest {
 		// can't really black-box test, "are these numbers sufficiently random?"
 		// But there are still useful tests to be written.
 		for (int i = 0; i < 1000; i++) {
-			Set<Integer> newDraw = machine.draw();
+			List<Integer> newDraw = machine.draw();
 
 			assertEquals(DRAW_NUMBER_COUNT, newDraw.size());
 

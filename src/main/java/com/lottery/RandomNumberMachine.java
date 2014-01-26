@@ -9,12 +9,9 @@ import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
-// TODO Consider hard-codingness.
 public class RandomNumberMachine {
 	private Random randomnessSource;
 	private List<Integer> range;
@@ -33,9 +30,9 @@ public class RandomNumberMachine {
 		}
 	}
 
-	public Set<Integer> draw() {
+	public List<Integer> draw() {
 		Collections.shuffle(range, randomnessSource);
 
-		return new HashSet<Integer>(range.subList(0, DRAW_NUMBER_COUNT));
+		return new ArrayList<Integer>(range.subList(0, DRAW_NUMBER_COUNT));
 	}
 }
