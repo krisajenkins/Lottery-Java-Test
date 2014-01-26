@@ -49,7 +49,8 @@ public class Game {
 	}
 
 	public static BigInteger calculatePrize(DateTime drawDate,
-			Collection<Integer> winningNumbers, Collection<Integer> chosenNumbers) {
+			Collection<Integer> winningNumbers,
+			Collection<Integer> chosenNumbers) {
 
 		BigInteger rawPrize = calculateRawPrize(drawDate, winningNumbers,
 				chosenNumbers);
@@ -59,9 +60,11 @@ public class Game {
 	}
 
 	private static BigInteger calculateMultiplier(DateTime drawDate) {
-		/* "During the month of February on a leap year, all winnings
-		 * are doubled and if a draw falls on Monday the 29th of February
-		 * they are tripled." */
+		/*
+		 * "During the month of February on a leap year, all winnings are
+		 * doubled and if a draw falls on Monday the 29th of February they are
+		 * tripled."
+		 */
 		if (drawDate.monthOfYear().isLeap()) {
 			if (drawDate.getDayOfMonth() == 29) {
 				return BigInteger.valueOf(3);
@@ -74,7 +77,8 @@ public class Game {
 	}
 
 	private static BigInteger calculateRawPrize(DateTime drawDate,
-			Collection<Integer> winningNumbers, Collection<Integer> chosenNumbers) {
+			Collection<Integer> winningNumbers,
+			Collection<Integer> chosenNumbers) {
 		Set<Integer> correctlyChosenNumbers = new HashSet<Integer>(
 				winningNumbers);
 		correctlyChosenNumbers.retainAll(chosenNumbers);
@@ -95,7 +99,8 @@ public class Game {
 		case 6:
 			return sumOf(winningNumbers).multiply(BigInteger.valueOf(10000));
 		default:
-			throw new IllegalStateException("Programmer error. This class has been changed and is no longer self-consistent.");
+			throw new IllegalStateException(
+					"Programmer error. This class has been changed and is no longer self-consistent.");
 		}
 	}
 }

@@ -26,7 +26,7 @@ public class CollectionUtils {
 		}
 		return sum;
 	}
-	
+
 	public static String toCSV(Collection<?> collection) {
 		String result = "";
 		Iterator<?> iterator = collection.iterator();

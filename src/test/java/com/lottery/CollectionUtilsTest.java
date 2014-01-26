@@ -28,7 +28,7 @@ public class CollectionUtilsTest {
 			assertEquals(product, productOf(numbers));
 		}
 	}
-	
+
 	@Test
 	public void testToCSV() {
 		assertEquals("", toCSV(Arrays.asList()));
