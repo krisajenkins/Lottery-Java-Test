@@ -31,7 +31,7 @@ public class Game {
 					"You must choose exactly %d numbers.", DRAW_NUMBER_COUNT));
 		}
 
-		DateTime drawDate = endDate.minusWeeks(26);
+		DateTime drawDate = endDate.minusWeeks(25);
 		List<DrawResult> results = new ArrayList<DrawResult>();
 
 		while (drawDate.compareTo(endDate) <= 0) {

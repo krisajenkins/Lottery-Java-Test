@@ -4,10 +4,12 @@ import static com.lottery.CollectionUtils.asSet;
 import static com.lottery.CollectionUtils.sumOf;
 import static com.lottery.DateTimeUtils.normaliseToMonday;
 import static com.lottery.DateTimeUtils.parse;
+import static java.lang.String.format;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +18,21 @@ import org.joda.time.DateTime;
 import org.junit.Test;
 
 public class GameTest {
+	@Test
+	public void testRunGamePeriod() {
+		Game game = new Game(new NumberGenerator() {
+			@Override
+			public List<Integer> draw() {
+				return Arrays.asList(1, 2, 3, 4, 5, 6);
+			}
+		});
+
+		DateTime endDate = parse("01/01/2001");
+		List<DrawResult> alwaysWins = game.runGamePeriod(endDate,
+				asSet(1, 2, 3, 4, 5, 6));
+		assertEquals(26, alwaysWins.size());
+		assertEquals(endDate, alwaysWins.get(25).getDrawDate());
+	}
 
 	@Test
 	public void testValueResultExample() {

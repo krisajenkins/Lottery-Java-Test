@@ -20,6 +20,18 @@ public class DrawResult {
 		this.prize = prize;
 	}
 
+	public DateTime getDrawDate() {
+		return drawDate;
+	}
+
+	public List<Integer> getWinningNumbers() {
+		return winningNumbers;
+	}
+
+	public BigInteger getPrize() {
+		return prize;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("%s; %s; %s", DateTimeUtils.format(drawDate),
