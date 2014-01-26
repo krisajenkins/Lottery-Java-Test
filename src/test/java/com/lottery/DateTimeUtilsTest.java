@@ -14,14 +14,14 @@ public class DateTimeUtilsTest {
 	public void testNormaliseToMonday() {
 		DateTime aDate = new DateTime();
 		long startYear = aDate.getYear();
-		
+
 		while (aDate.getYear() < startYear + 100) {
 			DateTime nearestMonday = normaliseToMonday(aDate);
 			Days delta = Days.daysBetween(aDate, nearestMonday);
-			
+
 			assertEquals(MONDAY, nearestMonday.getDayOfWeek());
 			assertTrue(delta.getDays() <= 3);
-			
+
 			aDate = aDate.plusDays(1);
 		}
 	}

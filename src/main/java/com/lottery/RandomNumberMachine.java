@@ -1,5 +1,9 @@
 package com.lottery;
 
+import static com.lottery.Game.DRAW_NUMBER_COUNT;
+import static com.lottery.Game.DRAW_NUMBER_MAX;
+import static com.lottery.Game.DRAW_NUMBER_MIN;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
@@ -15,13 +19,16 @@ public class RandomNumberMachine {
 	private Random randomnessSource;
 	private List<Integer> range;
 
-	public RandomNumberMachine() throws NoSuchAlgorithmException,
-			NoSuchProviderException {
-		this.randomnessSource = SecureRandom.getInstance("SHA1PRNG", "SUN");
-		this.randomnessSource.nextBytes(new byte[] {});
+	public RandomNumberMachine() {
+		try {
+			this.randomnessSource = SecureRandom.getInstance("SHA1PRNG", "SUN");
+			this.randomnessSource.nextBytes(new byte[] {});
+		} catch (NoSuchAlgorithmException | NoSuchProviderException e) {
+			throw new RuntimeException(e);
+		}
 
 		this.range = new ArrayList<Integer>();
-		for (int i = 1; i <= 60; i++) {
+		for (int i = DRAW_NUMBER_MIN; i <= DRAW_NUMBER_MAX; i++) {
 			this.range.add(i);
 		}
 	}
@@ -29,6 +36,6 @@ public class RandomNumberMachine {
 	public Set<Integer> draw() {
 		Collections.shuffle(range, randomnessSource);
 
-		return new HashSet<Integer>(range.subList(0, 6));
+		return new HashSet<Integer>(range.subList(0, DRAW_NUMBER_COUNT));
 	}
 }

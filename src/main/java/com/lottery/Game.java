@@ -4,16 +4,49 @@ import static com.lottery.SetUtils.productOf;
 import static com.lottery.SetUtils.sumOf;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.joda.time.DateTime;
 
 public class Game {
+	public static final int DRAW_NUMBER_MIN = 1;
+	public static final int DRAW_NUMBER_MAX = 60;
+	public static final int DRAW_NUMBER_COUNT = 6;
+
+	private RandomNumberMachine machine;
+
+	public Game() {
+		this.machine = new RandomNumberMachine();
+	}
+
+	public List<GameResult> runGamePeriod(DateTime endDate,
+			Set<Integer> chosenNumbers) {
+		List<GameResult> results = new ArrayList<GameResult>();
+
+		DateTime drawDate = endDate.minusWeeks(26);
+
+		while (drawDate.compareTo(endDate) <= 0) {
+			Set<Integer> winningNumbers = machine.draw();
+			BigInteger prize = calculatePrize(drawDate, winningNumbers,
+					chosenNumbers);
+
+			GameResult result = new GameResult(drawDate, winningNumbers, prize);
+			results.add(result);
+
+			drawDate = drawDate.plusWeeks(1);
+		}
+
+		return results;
+	}
+
 	public static BigInteger calculatePrize(DateTime drawDate,
 			Set<Integer> winningNumbers, Set<Integer> chosenNumbers) {
 
-		BigInteger rawPrize = calculateRawPrize(drawDate, winningNumbers, chosenNumbers);
+		BigInteger rawPrize = calculateRawPrize(drawDate, winningNumbers,
+				chosenNumbers);
 		BigInteger multiplier = calculateMultiplier(drawDate);
 
 		return rawPrize.multiply(multiplier);
@@ -27,7 +60,7 @@ public class Game {
 			if (drawDate.getDayOfMonth() == 29) {
 				return BigInteger.valueOf(3);
 			}
-			
+
 			return BigInteger.valueOf(2);
 		}
 
