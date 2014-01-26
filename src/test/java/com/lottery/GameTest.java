@@ -1,6 +1,6 @@
 package com.lottery;
 
-import static com.lottery.CollectionUtils.setOf;
+import static com.lottery.CollectionUtils.asSet;
 import static com.lottery.CollectionUtils.sumOf;
 import static com.lottery.DateTimeUtils.normaliseToMonday;
 import static com.lottery.DateTimeUtils.parse;
@@ -33,7 +33,7 @@ public class GameTest {
 				multiplier = 1;
 			}
 
-			Set<Integer> winningNumbers = setOf(1, 2, 3, 4, 5, 6);
+			Set<Integer> winningNumbers = asSet(1, 2, 3, 4, 5, 6);
 
 			// Losing rule.
 			checkSingleGame(drawDate, sumOf(winningNumbers), multiplier,
@@ -118,7 +118,7 @@ public class GameTest {
 			Integer... chosenNumbers) {
 		assertEquals(expectedPrize.multiply(BigInteger.valueOf(multiplier)),
 				Game.calculatePrize(drawDate, winningNumbers,
-						setOf(chosenNumbers)));
+						asSet(chosenNumbers)));
 	}
 
 	private void checkSingleGame(DateTime drawDate, Integer expectedPrize,

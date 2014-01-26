@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class CollectionUtils {
-	public static HashSet<Integer> setOf(Integer... integers) {
+	public static HashSet<Integer> asSet(Integer... integers) {
 		return new HashSet<Integer>(Arrays.asList(integers));
 	}
 
