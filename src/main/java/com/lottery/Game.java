@@ -59,9 +59,9 @@ public class Game {
 	}
 
 	private static BigInteger calculateMultiplier(DateTime drawDate) {
-		// "There are a few special cases. During the month of February on a
-		// leap year, all winnings are doubled and if a draw falls on Monday the
-		// 29th of February they are tripled."
+		/* "During the month of February on a leap year, all winnings
+		 * are doubled and if a draw falls on Monday the 29th of February
+		 * they are tripled." */
 		if (drawDate.monthOfYear().isLeap()) {
 			if (drawDate.getDayOfMonth() == 29) {
 				return BigInteger.valueOf(3);
