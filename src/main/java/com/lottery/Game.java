@@ -26,10 +26,7 @@ public class Game {
 
 	public List<DrawResult> runGamePeriod(DateTime endDate,
 			Collection<Integer> chosenNumbers) {
-		if (chosenNumbers.size() != DRAW_NUMBER_COUNT) {
-			throw new IllegalArgumentException(format(
-					"You must choose exactly %d numbers.", DRAW_NUMBER_COUNT));
-		}
+		assert chosenNumbers.size() == DRAW_NUMBER_COUNT;
 
 		DateTime drawDate = endDate.minusWeeks(25);
 		List<DrawResult> results = new ArrayList<DrawResult>();
@@ -99,8 +96,9 @@ public class Game {
 		case 6:
 			return sumOf(winningNumbers).multiply(BigInteger.valueOf(10000));
 		default:
-			throw new IllegalStateException(
-					"Programmer error. This class has been changed and is no longer self-consistent.");
+			
 		}
+		
+		throw new IllegalStateException("Programmer error. This class has been changed and is no longer self-consistent.");
 	}
 }

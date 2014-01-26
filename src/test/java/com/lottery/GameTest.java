@@ -32,6 +32,10 @@ public class GameTest {
 				asSet(1, 2, 3, 4, 5, 6));
 		assertEquals(26, alwaysWins.size());
 		assertEquals(endDate, alwaysWins.get(25).getDrawDate());
+		
+		for (DrawResult result : alwaysWins) {
+			assertEquals(result.getDrawDate().getDayOfWeek(), endDate.getDayOfWeek());
+		}
 	}
 
 	@Test
@@ -108,13 +112,13 @@ public class GameTest {
 				break;
 			case 4:
 				assertGreaterThanOrEqual(prize,
-						BigInteger.valueOf((4 * 1000) + (1 * 2 * 3 * 4)));
+						BigInteger.valueOf((4 * 1000) + (1 * 2)));
 				assertLessThanOrEqual(prize,
 						BigInteger.valueOf((4 * 1000) + (60 * 59)));
 				break;
 			case 5:
 				assertGreaterThanOrEqual(prize,
-						BigInteger.valueOf((5 * 1000) + (1 * 2 * 3 * 4 * 5)));
+						BigInteger.valueOf((5 * 1000) + 1));
 				assertLessThanOrEqual(prize,
 						BigInteger.valueOf((5 * 1000) + (60)));
 				break;
