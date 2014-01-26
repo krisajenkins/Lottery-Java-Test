@@ -22,9 +22,9 @@ public class Game {
 		this.machine = new RandomNumberMachine();
 	}
 
-	public List<GameResult> runGamePeriod(DateTime endDate,
+	public List<DrawResult> runGamePeriod(DateTime endDate,
 			Set<Integer> chosenNumbers) {
-		List<GameResult> results = new ArrayList<GameResult>();
+		List<DrawResult> results = new ArrayList<DrawResult>();
 
 		DateTime drawDate = endDate.minusWeeks(26);
 
@@ -33,7 +33,7 @@ public class Game {
 			BigInteger prize = calculatePrize(drawDate, winningNumbers,
 					chosenNumbers);
 
-			GameResult result = new GameResult(drawDate, winningNumbers, prize);
+			DrawResult result = new DrawResult(drawDate, winningNumbers, prize);
 			results.add(result);
 
 			drawDate = drawDate.plusWeeks(1);

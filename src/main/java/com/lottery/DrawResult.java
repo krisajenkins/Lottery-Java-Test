@@ -5,12 +5,12 @@ import java.util.Set;
 
 import org.joda.time.DateTime;
 
-public class GameResult {
+public class DrawResult {
 	private DateTime drawDate;
 	private Set<Integer> winningNumbers;
 	private BigInteger prize;
 
-	public GameResult(DateTime drawDate, Set<Integer> winningNumbers,
+	public DrawResult(DateTime drawDate, Set<Integer> winningNumbers,
 			BigInteger prize) {
 		this.drawDate = drawDate;
 		this.winningNumbers = winningNumbers;

@@ -21,8 +21,8 @@ public class App {
 		}
 
 		Game game = new Game();
-		List<GameResult> results = game.runGamePeriod(endDate, chosenNumbers);
-		for (GameResult result : results) {
+		List<DrawResult> results = game.runGamePeriod(endDate, chosenNumbers);
+		for (DrawResult result : results) {
 			System.out.println(result);
 		}
 	}
