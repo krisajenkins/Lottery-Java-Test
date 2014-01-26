@@ -14,11 +14,11 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class RandomNumberMachineTest {
+public class RandomNumberGeneratorTest {
 	@Test
 	public void testDraw() throws NoSuchAlgorithmException,
 			NoSuchProviderException {
-		RandomNumberMachine machine = new RandomNumberMachine();
+		RandomNumberGenerator machine = new RandomNumberGenerator();
 
 		// It's hard to unit test a random number generator convincingly. You
 		// can't really black-box test, "are these numbers sufficiently random?"

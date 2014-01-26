@@ -62,7 +62,7 @@ public class GameTest {
 	@Test
 	public void testValueResultSimulation() {
 		// A few constraint-checks.
-		RandomNumberMachine machine = new RandomNumberMachine();
+		RandomNumberGenerator machine = new RandomNumberGenerator();
 		DateTime drawDate = DateTimeUtils.parse("01/01/2000");
 
 		for (int i = 0; i < 5000; i++) {

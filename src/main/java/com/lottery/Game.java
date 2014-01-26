@@ -18,10 +18,10 @@ public class Game {
 	public static final int DRAW_NUMBER_MAX = 60;
 	public static final int DRAW_NUMBER_COUNT = 6;
 
-	private RandomNumberMachine machine;
+	private NumberGenerator generator;
 
-	public Game() {
-		this.machine = new RandomNumberMachine();
+	public Game(NumberGenerator generator) {
+		this.generator = generator;
 	}
 
 	public List<DrawResult> runGamePeriod(DateTime endDate,
@@ -35,7 +35,7 @@ public class Game {
 		List<DrawResult> results = new ArrayList<DrawResult>();
 
 		while (drawDate.compareTo(endDate) <= 0) {
-			List<Integer> winningNumbers = machine.draw();
+			List<Integer> winningNumbers = generator.draw();
 			BigInteger prize = calculatePrize(drawDate, winningNumbers,
 					chosenNumbers);
 

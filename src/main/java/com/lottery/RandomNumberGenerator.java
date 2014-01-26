@@ -12,11 +12,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class RandomNumberMachine {
+public class RandomNumberGenerator implements NumberGenerator {
 	private Random randomnessSource;
 	private List<Integer> range;
 
-	public RandomNumberMachine() {
+	public RandomNumberGenerator() {
 		try {
 			this.randomnessSource = SecureRandom.getInstance("SHA1PRNG", "SUN");
 			this.randomnessSource.nextBytes(new byte[] {});

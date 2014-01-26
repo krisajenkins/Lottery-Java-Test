@@ -20,7 +20,8 @@ public class App {
 			chosenNumbers.add(number);
 		}
 
-		Game game = new Game();
+		NumberGenerator generator = new RandomNumberGenerator();
+		Game game = new Game(generator);
 		List<DrawResult> results = game.runGamePeriod(endDate, chosenNumbers);
 		for (DrawResult result : results) {
 			System.out.println(result);
