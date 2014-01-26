@@ -95,34 +95,34 @@ public class GameTest {
 			case 0:
 			case 1:
 			case 2:
-				assertTrue(prize.compareTo(BigInteger.valueOf(1 + 2 + 3 + 4 + 5
-						+ 6)) >= 0);
-				assertTrue(prize.compareTo(BigInteger.valueOf(60 + 59 + 58 + 57
-						+ 56 + 55)) <= 0);
+				assertGreaterThanOrEqual(prize,
+						BigInteger.valueOf(1 + 2 + 3 + 4 + 5 + 6));
+				assertLessThanOrEqual(prize,
+						BigInteger.valueOf(60 + 59 + 58 + 57 + 56 + 55));
 				break;
 			case 3:
-				assertTrue(prize.compareTo(BigInteger.valueOf((3 * 1000)
-						+ (1 * 2 * 3))) >= 0);
-				assertTrue(prize.compareTo(BigInteger.valueOf((3 * 1000)
-						+ (60 * 59 * 58))) <= 0);
+				assertGreaterThanOrEqual(prize,
+						BigInteger.valueOf((3 * 1000) + (1 * 2 * 3)));
+				assertLessThanOrEqual(prize,
+						BigInteger.valueOf((3 * 1000) + (60 * 59 * 58)));
 				break;
 			case 4:
-				assertTrue(prize.compareTo(BigInteger.valueOf((4 * 1000)
-						+ (1 * 2 * 3 * 4))) >= 0);
-				assertTrue(prize.compareTo(BigInteger.valueOf((4 * 1000)
-						+ (60 * 59))) <= 0);
+				assertGreaterThanOrEqual(prize,
+						BigInteger.valueOf((4 * 1000) + (1 * 2 * 3 * 4)));
+				assertLessThanOrEqual(prize,
+						BigInteger.valueOf((4 * 1000) + (60 * 59)));
 				break;
 			case 5:
-				assertTrue(prize.compareTo(BigInteger.valueOf((5 * 1000)
-						+ (1 * 2 * 3 * 4 * 5))) >= 0);
-				assertTrue(prize.compareTo(BigInteger
-						.valueOf((5 * 1000) + (60))) <= 0);
+				assertGreaterThanOrEqual(prize,
+						BigInteger.valueOf((5 * 1000) + (1 * 2 * 3 * 4 * 5)));
+				assertLessThanOrEqual(prize,
+						BigInteger.valueOf((5 * 1000) + (60)));
 				break;
 			case 6:
-				assertTrue(prize.compareTo(BigInteger.valueOf(10000 * (1 + 2
-						+ 3 + 4 + 5 + 6))) >= 0);
-				assertTrue(prize.compareTo(BigInteger.valueOf(10000 * (60 + 59
-						+ 58 + 57 + 56 + 55))) <= 0);
+				assertGreaterThanOrEqual(prize,
+						BigInteger.valueOf(10000 * (1 + 2 + 3 + 4 + 5 + 6)));
+				assertLessThanOrEqual(prize, BigInteger.valueOf(10000 * (60
+						+ 59 + 58 + 57 + 56 + 55)));
 				break;
 			default:
 				throw new IllegalStateException();
@@ -143,5 +143,15 @@ public class GameTest {
 			Integer... chosenNumbers) {
 		checkSingleGame(drawDate, BigInteger.valueOf(expectedPrize),
 				multiplier, winningNumbers, chosenNumbers);
+	}
+
+	public static <T> void assertLessThanOrEqual(Comparable<T> a, T b) {
+		assertTrue(format("%s should be <= %s", a.toString(), b.toString()),
+				a.compareTo(b) <= 0);
+	}
+
+	public static <T> void assertGreaterThanOrEqual(Comparable<T> a, T b) {
+		assertTrue(format("%s should be >= %s", a.toString(), b.toString()),
+				a.compareTo(b) >= 0);
 	}
 }
